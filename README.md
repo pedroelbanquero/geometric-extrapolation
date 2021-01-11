@@ -84,6 +84,19 @@ Just sum prediction and the error prediction 8.16 + (-0.16) = 8 is the next resu
 
 ## Drawing models
 
+## Limits of probabilistic extrapolation for 100 % precision
+
+- The data set is incremental
+
+- No contain a pattern generated with prime numbers
+
+- Is not a curve
+
+- Frequency not more than .....
+
+- Amplitude change no more than  ...
+
+
 ## OEIS series with probabilistic extrapolation solution
 
 
