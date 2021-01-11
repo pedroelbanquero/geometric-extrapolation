@@ -82,7 +82,26 @@ Just sum prediction and the error prediction 8.16 + (-0.16) = 8 is the next resu
 
 ## Error Cycles
 
+Sometimes the errors announces cylic behaviour
+
+[0,0,1,0,0,1,0,0,1]
+
+In the OEIS serie A000X the algorithm will fail each 2 numbers
+
+Applying the error cycle pattern we solve the error in many serie with this kind of behaviour.
+
+
 ## Drawing models
+
+````haskell
+
+drawpo [1,2,3,4,5,6] [1,2,3,4,5,6,7,8,9]
+
+````
+
+
+
+
 
 ## Limits of probabilistic extrapolation for 100 % precision
 
