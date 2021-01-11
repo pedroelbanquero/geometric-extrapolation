@@ -78,7 +78,19 @@ Just sum prediction and the error prediction 8.16 + (-0.16) = 8 is the next resu
 
 - Cicle pattern
 
+
 - Probability Extrapolation Cycle
+
+````haskell
+
+probability_periods [1,2,3,4,5,1,2,3,4,1,2,3]
+
+[4,1,3,1,2]
+
+
+````
+The funcion split the serie in up patterns and down patters, how many of each one, 5 up , 1 down, 3 up, 1 down, 2 up
+
 
 ## Error Cycles
 
