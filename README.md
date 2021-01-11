@@ -72,5 +72,18 @@ percents 0.25 0.2 = 86.80555555555556
 
 Just sum prediction and the error prediction 8.16 + (-0.16) = 8 is the next result  
 
+## Probabilistic base recovery from dataset
+
+## Cyclic patterns 
+
+- Cicle pattern
+
+- Probability Extrapolation Cycle
+
+## Error Cycles
+
+## Drawing models
+
+## OEIS series with probabilistic extrapolation solution
 
 
