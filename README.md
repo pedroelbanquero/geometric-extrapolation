@@ -2,6 +2,7 @@
 
 Author - Vicent Nos Ripolles
 
+
 probabilistic extrapolation on incremental series algorithm. A ciclic probabilitiy prediction based on difference layers on a data set
 
 Applications 
@@ -13,6 +14,14 @@ Applications
 - data modeling
 
 - risk modeling
+
+Usage :
+
+````
+ghci probnet.hs
+
+````
+
 
 ## Fraction patterns
 
