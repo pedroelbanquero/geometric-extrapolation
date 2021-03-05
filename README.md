@@ -134,7 +134,8 @@ drawpo [1,2,3,4,5,6] [1,2,3,4,5,6,7,8,9]
 
 Solves Around 20 % osis series with a unique function
 
-![Probnet](https://github.com/video_2021-03-05_02-19-18.mp4)
+![Video Test Probnet](https://github.com/ pedroelbanquero /
+probabilistic-extrapolation/video_2021-03-05_02-19-18.mp4)
 
 | Serie | Function | Probability extrapolation cordenates |
 | ----- | -------- |  ----------------------------------- |
