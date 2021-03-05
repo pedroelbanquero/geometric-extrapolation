@@ -1,5 +1,7 @@
 # probabilistic-extrapolation
 
+Author - Vicent Nos Ripolles
+
 probabilistic extrapolation on incremental series algorithm. A ciclic probabilitiy prediction based on difference layers on a data set
 
 Applications 
@@ -129,6 +131,10 @@ drawpo [1,2,3,4,5,6] [1,2,3,4,5,6,7,8,9]
 
 
 ## OEIS series with probabilistic extrapolation solution
+
+Solves Around 20 % osis series with a unique function
+
+![Probnet](https://github.com/video_2021-03-05_02-19-18.mp4)
 
 | Serie | Function | Probability extrapolation cordenates |
 | ----- | -------- |  ----------------------------------- |
