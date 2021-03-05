@@ -132,7 +132,7 @@ drawpo [1,2,3,4,5,6] [1,2,3,4,5,6,7,8,9]
 
 ## OEIS series with probabilistic extrapolation solution
 
-Solves Around 20 % osis series with a unique function
+Solves Around 20 % oesis series with a unique function
 
 ![Video Test Probnet](https://github.com/pedroelbanquero/probabilistic-extrapolation/video_2021-03-05_02-19-18.mp4)
 
