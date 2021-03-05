@@ -53,7 +53,7 @@ The difference between the prediction and the reality originate a error pattern,
 
 On the serie [1,2,3,4,5,6,7]
 
-Whe can predict the next error computing the difference of the 7 element in the serie with [1,2,3,4,5,6] and maque the sum with 7
+Whe can predict the next error computing the difference of the 7 element in the serie with [1,2,3,4,5,6] and doing the sum with 7
 
 6*100/83.33333333333333  == 7.2
 
