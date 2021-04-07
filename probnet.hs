@@ -12,15 +12,18 @@ import Data.List
 import Data.Ratio -- for the case of inputs with Ratio or Rational list elements
 
 
--- | Ratios between consecutive elements (logarithmic differences). 
-percents :: RealFrac a => [a] -> [a]
-percents dat = zipWith (/) (tail dat) dat
-
 -- | Element value of 'list' nearest to 'n'
 nearnum :: RealFrac a => a -> [a] -> a
 nearnum n = minimumBy nearer
    where
    nearer x y = compare (abs (x - n)) (abs (y - n))
+
+-- | Ratios between consecutive elements (logarithmic differences). 
+percents :: RealFrac a => [a] -> [a]
+percents dat = zipWith quotient dat (tail dat)
+   where 
+   quotient 0 = error "Sequence values must not be 0, in Probnet.percents. "
+   quotient y = (/ y)
 
 -- | This is to assume that the next ratio is close to that of the element 
 -- with the closest value to the last element; in case of monotonic data 
@@ -34,27 +37,25 @@ predict1 dat  = ratio * last dat
 
 predict :: (Integral b, RealFrac a) => Int -> [a] -> [b]
 predict layers dat 
-   | layers > 1     = predict (layers - 1) out -- execute next in the serie
-   | otherwise = fmap round out
+   | layers > 1   = predict (layers - 1) out -- execute next in the serie
+   | otherwise    = fmap round out
    where
    out = delete ned dat ++ [predict1 dat] 
    ned = nearnum (last dat) (init dat)
 
 probnet :: (Integral b, RealFrac a) => Int -> [a] -> [b]
--- probnet :: (RealFrac a) => Int -> [a] -> [a]
 probnet layers dat
    | layers > 1   = probnet (layers - 1) out
    | otherwise    = fmap round out
    where
    out = dat ++ [predict1 dat + prerr dat]
 
-prerr :: RealFrac a => [a] -> a
 -- | This is the next prediction for the difference between each 
 -- original element and its prediction based on previous elements
+prerr :: RealFrac a => [a] -> a
 prerr dat 
    | last err == 0   = 0 
    | otherwise       = predict1 $ drop 2 err
    where  
    err   = zipWith subtract pred dat -- differences between elements and its predictions
    pred  = fmap predict1 $ inits dat -- 2 first inits have 0 and 1 elements, will be dropped
-
