@@ -1,163 +1,90 @@
-# probabilistic-extrapolation
+# Geometric Extrapolation of Integer Sequences
 
 Author - Vicent Nos Ripolles
 
 
-probabilistic extrapolation on incremental series algorithm. A ciclic probabilitiy prediction based on difference layers on a data set
+## The problem
 
-Applications 
+In many situations, we have finite sequences of integer values, and we would like to predict which would be the next one, or the next several ones, without the knowledge of the mathematical definition of the sequence. 
+
+A solution based just on the available data has applications on the following areas, among others:
 
 - time series forecasting
-
 - uncertain prediction
-
 - data modeling
-
 - risk modeling
 
-Usage :
 
-````
-ghci probnet.hs
+## Simple base solution
 
-````
+We start with a simple geometric solution, that is to calculate the ratio (quotient) of the last value relative to the previous one, and apply it to the last value to calculate the next one. 
 
+For example, if we have some values of the Fibonacci sequence: 
 
-## Fraction patterns
+    fibo = [1,2,3,5,8,13]
 
-Any dataset can be translated to a difference patter
+we get the ratios of each element relative to its previous one: 
 
-[1,2,3,4,5,6,7] -> [2-1, 3-2, 4-3, 5-4,6-5 ,7-6] = [1,1,1,1,1,1]
+    percents fibo
+    [2.0,1.5,1.6666666666666667,1.6,1.625]
 
-Any dataset can be translated toa a probability difference pattern
+Then, we predict the next element as the product of the last element by the last ratio: 
 
-[1,2,3,4,5,6,7] -> [1*100/2,2*100/3,3*100/4,4*100/5,5*100/6,6*100/7] -> [50.0,66.66666666666667,75.0,80.0,83.33333333333333,85.71428571428571]
+    13 * 1.625 = 21.125
 
-## Serie pattern layers
 
-Any fraction pattern can be generate n⁻1+n-2 .. n probabilistic patterns
+## Improving the result with the prediction of the error
 
-[50.0,66.66666666666667,75.0,80.0,83.33333333333333,85.71428571428571]
+We can get the predicted value for each subsequence of initial values of the original sequence. 
 
-[75.0,88.8888888888889,93.75,96.0,97.22222222222221]
+    drop 2 (inits fibo)
+    [[1,2],[1,2,3],[1,2,3,5],[1,2,3,5,8],[1,2,3,5,8,13]]
 
-[84.37499999999999,94.81481481481484,97.65625,98.74285714285715]
+    fmap predict1 it
+    [4.0,4.5,8.333333333333334,12.8,21.125]
 
-[88.98925781249996,97.0903703703704,98.89955873842592]
+Then, we can calculate the difference between the predicted value and the real value. This way, we get a sequence of the errors, and we can calculate the predicted value of the next error, wich we will add to the simple prediction, notably improving the result. 
 
-[91.65611118078226,98.1706810514286]
+    err = zipWith subtract it (drop 2 fibo)
+    [-1.0,0.5,-0.3333333333333339,0.1999999999999993]
 
-[93.36403720451572]
+    predict1 it
+    -0.1333333333333331
 
+    21.125 - 0.1333333333333331 = 20.991666666666667
 
-## Prediction 
+We round the result to get the integer predicted value. 
 
-Las probability * last data value in the serie predict the next
 
-7*100/85.71428571428571 = round 8.16 = 8
+## Sequences with quasi-cyclic pattern
 
-## Error Prediction
+When a sequence is not monothonic, we assume that it has a repetitive pattern, so that the ratio used for prediction will be the one of the element whose value is closest to the last element. 
 
-The difference between the prediction and the reality originate a error pattern, a serie who describes how increase or decreas the error in his expansion.
+For example, in the next sequence, the value closest to the last one is the first `3`, and the ratio of that position is `4/3`, so the predicted value will be `3*(4/3)`:
 
-On the serie [1,2,3,4,5,6,7]
+    percents [1,2,3,4,5,1,2,3,4,1,2,3]
+    [2.0,1.5,1.3333333333333333,1.25,0.2,2.0,1.5,1.3333333333333333,0.25,2.0,1.5]
 
-Whe can predict the next error computing the difference of the 7 element in the serie with [1,2,3,4,5,6] and doing the sum with 7
+    predict1 [1,2,3,4,5,1,2,3,4,1,2,3]
+    4.0
 
-6*100/83.33333333333333  == 7.2
 
-7 - 7.2 = - 0.2 = error estimation
+## Recursive layers of predictions
 
-## Error Pattern layers
+Once we have predicted the next value of a sequence, we can append it to the original sequence and predict another element. We can do this as many times as we want. We call "layers" to the number of recursions. Then, if we apply 3 layers to our fibonacci secuence `fib = [1,2,3,5,8,13]`, we get 3 more values: 
 
+    probnet 3 fib
+    [1,2,3,5,8,13,21,34,55]
 
-5*100/80 = 6.25
 
-6*100/83.33333333333333  == 7.2
+## Testing
 
-percents 0.25 0.2 = 86.80555555555556
+The file `test-probnet.hs` contains a function `testoeis` to bulk testing the function `probnet` against a range of OEIS sequences, giving the numbers after the 'A' on the OEIS sequence ID. 
 
--0.2*100/86.80555..6 = - 0.16
+    testoeis 1 20
+    [("A3",[1,1,1,1,2,2,1,2,2,2,3,2,2,4,2,2,4,2,3,4,4,2,3,4,2,6,3,2,6,4,3,4,4,4,6,4,2,6,4,4,8,4,3,6,4,4,5,4,4,6,6,4,6,6,4,8,4,2,9,4,6,8,4,4,8,8,3,8,8,4,7,4,4,10,6,6,8,4,5,8,6,4,9,8,4,10,6,4,12,8,6,6,4,8,8,8,4,8,6,4]),("A12",[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])]
 
-## Prediction with error correction
 
-Just sum prediction and the error prediction 8.16 + (-0.16) = 8 is the next result  
 
-## Probabilistic base recovery from dataset
 
-## Cyclic patterns 
 
-- Cicle pattern
-
-
-- Probability Extrapolation Cycle
-
-````haskell
-
-probability_periods [1,2,3,4,5,1,2,3,4,1,2,3]
-
-[4,1,3,1,2]
-
-
-````
-The funcion split the serie in up patterns and down patters, how many of each one, 5 up , 1 down, 3 up, 1 down, 2 up
-
-
-## Error Cycles
-
-Sometimes the errors announces cylic behaviour
-
-[0,0,1,0,0,1,0,0,1]
-
-In the OEIS serie A000X the algorithm will fail each 2 numbers
-
-Applying the error cycle pattern we solve the error in many serie with this kind of behaviour.
-
-
-## Drawing models
-
-````haskell
-
-drawpo [1,2,3,4,5,6] [1,2,3,4,5,6,7,8,9]
-
-````
-
-
-
-
-
-## Limits of probabilistic extrapolation for 100 % precision
-
-- The data set is incremental
-
-- No contain a pattern generated with prime numbers
-
-- Is not a curve
-
-- Frequency not more than .....
-
-- Amplitude change no more than  ...
-
-
-## OEIS series with probabilistic extrapolation solution
-
-Solves Around 20 % oesis series with a unique function
-
-![Video Test Probnet](https://github.com/pedroelbanquero/probabilistic-extrapolation/video_2021-03-05_02-19-18.mp4)
-
-| Serie | Function | Probability extrapolation cordenates |
-| ----- | -------- |  ----------------------------------- |
-
-
-## Generate series
-
-- Command
-
-````haskell
-probnet [1,2,3,4,5,6] 10
-
--- Result 
-
-[1.0,2.0,3.0,4.0,5.0,6.0,7.0,8.0,9.0,10.0,11.0,12.0,13.0,14.0,15.0,16.0,17.0]
-
-````
