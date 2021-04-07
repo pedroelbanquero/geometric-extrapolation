@@ -15,7 +15,10 @@ A solution based just on the available data has applications on the following ar
 - risk modeling
 
 
-## Simple base solution
+## A geometric way of prediction 
+
+
+### Simple base solution
 
 We start with a simple geometric solution, that is to calculate the ratio (quotient) of the last value relative to the previous one, and apply it to the last value to calculate the next one. 
 
@@ -33,7 +36,7 @@ Then, we predict the next element as the product of the last element by the last
     13 * 1.625 = 21.125
 
 
-## Improving the result with the prediction of the error
+### Improving the result with the prediction of the error
 
 We can get the predicted value for each subsequence of initial values of the original sequence. 
 
@@ -56,7 +59,7 @@ Then, we can calculate the difference between the predicted value and the real v
 We round the result to get the integer predicted value. 
 
 
-## Sequences with quasi-cyclic pattern
+### Sequences with quasi-cyclic pattern
 
 When a sequence is not monothonic, we assume that it has a repetitive pattern, so that the ratio used for prediction will be the one of the element whose value is closest to the last element. 
 
@@ -69,12 +72,44 @@ For example, in the next sequence, the value closest to the last one is the firs
     4.0
 
 
-## Recursive layers of predictions
+### Recursive layers of predictions
 
 Once we have predicted the next value of a sequence, we can append it to the original sequence and predict another element. We can do this as many times as we want. We call "layers" to the number of recursions. Then, if we apply 3 layers to our fibonacci secuence `fib = [1,2,3,5,8,13]`, we get 3 more values: 
 
-    probnet 3 fib
+    probnet 3 fibo
     [1,2,3,5,8,13,21,34,55]
+
+
+## Problems and limitations
+
+The geometric way, that is, a way based on ratios of values, can only be valid for non-zero values, and is not suitable for sequences with negative and positive values. In that case it shoukd be more appropiate the use of a usual diferential method, which can be very simmilar to the one presented hera, but using diferences of elements instead of quotients of elements. 
+
+The case of zero values is not solved here. The function will just return an error if any element is 0. 
+
+
+## Tecnical details
+
+### Data types
+
+The type signature of the function is such that any `RealFrac` data type can be used for the values of the elements in the input sequence. The internal calculations will be done in that data type, preserving the precicion of it. 
+
+For example, if the type is a 32 bit `Float`, the calculus would be made with about 21 decimal digits of precision, but if the input elements are `Rational`, the intermediate calculus would preserve infinite precision, until the rounding for the Ìnteger` output. That is the reason for importing `Data.Ratio`. 
+
+    fibo = [1,2,3,5,8,13 :: Float]
+    predic1 fibo
+    21.125
+
+    fibo = [1,2,3,5,8,13 :: Rational]
+    predict1 fibo
+    169 % 8
+
+It also implies that the input sequence can not be of any `Integral` type, it must be previously converted to a `RealFrac` type by using, for example, `fromInteger` conversion function. It is done this way on the testing file `test-probnet.hs`. 
+
+### Arithmetic equivalent method
+
+It can be noticed that an arithmetic, instead of geometric, method for the extrapolation can be coded by just changing the `quotient` `sub-function in the `percents` function by the standard `subtract`, and the product (*) in the `predict1` function by addition (+).
+
+Such method would not require that every element in the sequence be different than 0, and the method would be suitable for sequences with negative and positive values. 
 
 
 ## Testing
@@ -84,7 +119,4 @@ The file `test-probnet.hs` contains a function `testoeis` to bulk testing the fu
     testoeis 1 20
     [("A3",[1,1,1,1,2,2,1,2,2,2,3,2,2,4,2,2,4,2,3,4,4,2,3,4,2,6,3,2,6,4,3,4,4,4,6,4,2,6,4,4,8,4,3,6,4,4,5,4,4,6,6,4,6,6,4,8,4,2,9,4,6,8,4,4,8,8,3,8,8,4,7,4,4,10,6,6,8,4,5,8,6,4,9,8,4,10,6,4,12,8,6,6,4,8,8,8,4,8,6,4]),("A12",[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])]
 
-
-
-
-
+The testing is made using just the first 10 values for predicting the 11 one, and comparing it with the real 11th element, counting it as valid when both, predicted and real, are equal. 
