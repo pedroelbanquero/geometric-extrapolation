@@ -125,3 +125,5 @@ Author - Vicent Nos Ripolles
 Dev Pedro S
 
 Dev Enrique S
+
+All rights are reserved
