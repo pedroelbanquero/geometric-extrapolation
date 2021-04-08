@@ -121,4 +121,5 @@ The testing is made using just the first 10 values for predicting the 11 one, an
 
 
 Author - Vicent Nos Ripolles
-
+Dev Pedro S
+Dev Enrique S
