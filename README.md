@@ -79,7 +79,7 @@ Once we have predicted the next value of a sequence, we can append it to the ori
 
 ## Problems and limitations
 
-The geometric way, that is, a way based on ratios of values, can only be valid for non-zero values, and is not suitable for sequences with negative and positive values. In that case it shoukd be more appropiate the use of a usual diferential method, which can be very simmilar to the one presented hera, but using diferences of elements instead of quotients of elements. 
+The geometric way, that is, a way based on ratios of values, can only be valid for non-zero values, and is not suitable for sequences with negative and positive values. In that case it should be more appropiate the use of a usual diferential method, which can be very simmilar to the one presented here, but using diferences of elements instead of quotients of elements. 
 
 The case of zero values is not solved here. The function will just return an error if any element is 0. 
 
