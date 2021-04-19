@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/home/cryptocalypse/.cabal/bin"
-libdir     = "/home/cryptocalypse/.cabal/lib/x86_64-linux-ghc-8.4.4/Probnet-0.1.0.0-1RE3l76kFTIBoIwR7Meh9V"
-dynlibdir  = "/home/cryptocalypse/.cabal/lib/x86_64-linux-ghc-8.4.4"
-datadir    = "/home/cryptocalypse/.cabal/share/x86_64-linux-ghc-8.4.4/Probnet-0.1.0.0"
-libexecdir = "/home/cryptocalypse/.cabal/libexec/x86_64-linux-ghc-8.4.4/Probnet-0.1.0.0"
-sysconfdir = "/home/cryptocalypse/.cabal/etc"
+bindir     = "/root/.cabal/bin"
+libdir     = "/root/.cabal/lib/x86_64-linux-ghc-8.4.4/Probnet-0.1.0.0-1RE3l76kFTIBoIwR7Meh9V"
+dynlibdir  = "/root/.cabal/lib/x86_64-linux-ghc-8.4.4"
+datadir    = "/root/.cabal/share/x86_64-linux-ghc-8.4.4/Probnet-0.1.0.0"
+libexecdir = "/root/.cabal/libexec/x86_64-linux-ghc-8.4.4/Probnet-0.1.0.0"
+sysconfdir = "/root/.cabal/etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "Probnet_bindir") (\_ -> return bindir)
