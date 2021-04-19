@@ -1,6 +1,25 @@
 # Probnet - Geometric Extrapolation of Integer Sequences with error prediction
 
+
+## Usage 
+
+````haskell
+
+ghci Probnet.hs
+
+````
+
+````haskell
+
+> probnet 1 [1,2,3,5,8]
+
+[1,2,3,5,8,13]
+
+````
+
+
 ## The problem
+
 
 In many situations, we have finite sequences of integer values, and we would like to predict which would be the next one, or the next several ones, without the knowledge of the mathematical definition of the sequence. 
 
