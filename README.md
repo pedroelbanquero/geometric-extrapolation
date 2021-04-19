@@ -1,5 +1,4 @@
-# Probnet - Geometric Extrapolation of Integer Sequences with error prediction
-
+# Probnet 
 
 ## Usage 
 
@@ -16,6 +15,8 @@ ghci Probnet.hs
 [1,2,3,5,8,13]
 
 ````
+
+## Geometric Extrapolation of Integer Sequences with error prediction
 
 
 ## The problem
