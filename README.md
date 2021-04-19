@@ -126,4 +126,4 @@ Dev Pedro S
 
 Dev Enrique S
 
-All rights are reserved
+All rights are reserved for commercial purposes of any derivatives of this document and source code. 
