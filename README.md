@@ -1,4 +1,4 @@
-# Geometric Extrapolation of Integer Sequences
+# Probnet - Geometric Extrapolation of Integer Sequences with error prediction
 
 ## The problem
 
