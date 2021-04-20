@@ -9,8 +9,8 @@ homepage:            https://github.com/pedroelbanquero/geometric-extrapolation
 license:             MIT
 license-file:        LICENSE
 author:              Vicent Nos
-maintainer:          vnos@blackhole.consulting
--- copyright:
+maintainer:          vnos@cobalt.tech,vnos@blackhole.consulting
+copyright:           Cobalt Technologies S.A
 category:            Math
 build-type:          Simple
 extra-source-files:  ChangeLog.md, README.md
