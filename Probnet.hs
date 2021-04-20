@@ -41,16 +41,17 @@ predict layers dat
    | layers > 1   = predict (layers - 1) out -- execute next in the serie
    | otherwise    = fmap round out
    where
-   out = delete ned dat ++ [predict1 dat] 
+   --out = delete ned dat ++ 
+   out = [predict1 dat] 
    ned = nearnum (last dat) (init dat)
 
 -- | Generate new prediction with error prediction 
 probnet :: (Integral b, RealFrac a) => Int -> [a] -> [b]
 probnet layers dat
-   | layers > 1   = probnet (layers - 1) out
+   | layers > 1   = probnet (layers - 1) $ map (\x-> fromIntegral (round x)) out 
    | otherwise    = fmap round out
    where
-   out = dat ++ [predict1 dat + prerr dat]
+   out = dat ++ [(predict1 dat + prerr dat)]
 
 -- | This is the next prediction for the difference between each 
 -- original element and its prediction based on previous elements
