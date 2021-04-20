@@ -1,5 +1,6 @@
--- | Authors : Vicent Nos Ripolles (Main Author)
--- Enrique Santos (Refactor Code)
+-- | Probnet 0.1.0.0
+-- | Usage : probnet 1 [1,2,3,5,8,13]
+-- | Result : [1,2,3,5,8,13,21]
 
 module Probnet (
    percents,
@@ -61,3 +62,8 @@ prerr dat
    where  
    err   = zipWith subtract pred dat -- differences between elements and its predictions
    pred  = fmap predict1 $ inits dat -- 2 first inits have 0 and 1 elements, will be dropped
+
+-- | Property of Cobalt Technologies Panamá
+-- | Authors : Vicent Nos Ripolles (Main Author)
+-- | Enrique Santos (Refactor Code)
+
