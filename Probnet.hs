@@ -11,8 +11,6 @@ module Probnet (
 
 import Data.List
 import Data.Ratio -- for the case of inputs with Ratio or Rational list elements
-import Data.List.Split
-import Data.Maybe
 
 -- | Element value of 'list' nearest to 'n'
 nearnum :: RealFrac a => a -> [a] -> a
