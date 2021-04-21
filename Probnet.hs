@@ -11,7 +11,8 @@ module Probnet (
 
 import Data.List
 import Data.Ratio -- for the case of inputs with Ratio or Rational list elements
-
+import Data.List.Split
+import Data.Maybe
 
 -- | Element value of 'list' nearest to 'n'
 nearnum :: RealFrac a => a -> [a] -> a
@@ -26,15 +27,24 @@ percents dat = zipWith quotient dat (tail dat)
    where 
    quotient y = (/ y)
 
+-- | Get ratio element
+ratio1 d f = percents d !! f
+
 -- | This is to assume that the next ratio is close to that of the element 
 -- with the closest value to the last element; in case of monotonic data 
 -- (always increasing or always decreasing) it is the last ratio. 
+
+
 predict1 :: RealFrac a => [a] -> a
-predict1 dat  = ratio * last dat
+predict1 dat  
+   | l >= lastper = (ratio1 (dat) (eleml+1)) * last dat 
+   | otherwise = (ratio1 dat eleml) * last dat
    where
-   ratio = percents dat !! eleml
    Just eleml = elemIndex ned dat
    ned = nearnum (last dat) (init dat)
+   l = last $ init dat
+   lastper = last dat 
+
 
 -- | Generates new prediction
 predict :: (Integral b, RealFrac a) => Int -> [a] -> [b]
@@ -42,8 +52,7 @@ predict layers dat
    | layers > 1   = predict (layers - 1) out -- execute next in the serie
    | otherwise    = fmap round out
    where
-   out = delete ned dat ++ [predict1 dat] 
-   ned = nearnum (last dat) (init dat)
+   out = [predict1 dat] 
 
 -- | Generate new prediction with error prediction 
 probnet :: (Integral b, RealFrac a) => Int -> [a] -> [b]
