@@ -35,7 +35,7 @@ ratio1 d f = percents d !! f
 
 predict1 :: RealFrac a => [a] -> a
 predict1 dat  
-   | l >= lastper = (ratio1 (dat) (eleml+1)) * last dat 
+   | l > lastper = (ratio1 (dat) (eleml+1)) * last dat 
    | otherwise = (ratio1 dat eleml) * last dat
    where
    Just eleml = elemIndex ned dat
