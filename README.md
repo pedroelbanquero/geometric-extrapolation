@@ -30,7 +30,7 @@ A solution based just on the available data has applications on the following ar
 - uncertain prediction
 - data modeling
 - risk modeling
-
+- data encoder decoder
 
 ## A geometric way of prediction 
 
