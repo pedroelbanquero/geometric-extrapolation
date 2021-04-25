@@ -139,7 +139,7 @@ The file `test-probnet.hs` contains a function `testoeis` to bulk testing the fu
 The testing is made using just the first 10 values for predicting the 11 one, and comparing it with the real 11th element, counting it as valid when both, predicted and real, are equal. 
 
 
-## TODO Experimental . Applications for encode and decode sequence data when follows a math pattern extrapolable with the method. Functional encoding
+## TO DO Experimental. Applications for encode and decode sequence data when follows a math pattern extrapolable with the method. Functional encoding 
 
 ### Encode data sequence
 
