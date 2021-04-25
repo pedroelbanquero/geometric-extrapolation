@@ -139,6 +139,58 @@ The file `test-probnet.hs` contains a function `testoeis` to bulk testing the fu
 The testing is made using just the first 10 values for predicting the 11 one, and comparing it with the real 11th element, counting it as valid when both, predicted and real, are equal. 
 
 
+## Applications for encode and decode sequence data when follows a math pattern extrapolable with the method. 
+
+### Encode data sequence
+Convert data sequence to f = (index,frac1,frac2,frac3,longitude)
+
+Convert data secuence to a function / symbol dictionary and replace sequence patterns for the symbol
+
+example parse 1,2,3,4,5,8,16.... / output -> (.,30,1,1,1),(,,10,2,4,8) .....,,
+
+The idea is convert different values in the same symbol, always the data value is in the sequence, in decode moment, replace the function symbol by the element in the index of the data sequence.
+
+	- add split patterns function to the dictionary
+	- rewrite sequence to new function symbols
+	- rewrite base for encoding
+	- output dictionary + rewrited symbols sequence
+	- Compare bit size to ensure encoding improvement, otherwise return the same data
+
+To find the proper functions just to calculate the entropy of the data by frequency. Match more popular factors in the data set and elaborate functions/symbol for each one following the steps, always use less bits symbols to replace the most popular functions in the data set.
+
+The content data of 20 elements of the sequence fibonacci can be stored in (20,1,1,2) something less than :
+
+[1,2,3,5,8,13,21,34,55,89,144,233,377,610,987,1597,2584,4181,6765,10946,17711,28657,46368,75025]
+
+
+Compresed in lzma :
+
+4 -rw-r--r-- 1 user user 103 Apr 25 11:55 testen2.lzma
+
+Probnet Storage (20,1,1,2):
+
+4 -rw-r--r-- 1 user user 9 Apr 25 11:57 testfunction.txt
+
+103 bytes vs 9 , and less with better encoding for decimal data for this case, because just are 3 symbols x 2 bit for each one , 6 bits
+
+
+
+
+### Decode data sequence
+
+Convert encoded probnet function parameters to data sequence
+
+Convert encoded data sequence to real data converting each symbol by his element in the dictionary function data secuence .
+
+        - get dictionary function
+	- replace funcion data secuence by function elements to generate the real data sequence
+	- output results
+	- return no function dictionary was found , or no functionon decoding for this sequence, if input data is not in the correct data type.
+
+
+
+
+
 
 Author - Vicent Nos Ripolles
 
