@@ -139,9 +139,10 @@ The file `test-probnet.hs` contains a function `testoeis` to bulk testing the fu
 The testing is made using just the first 10 values for predicting the 11 one, and comparing it with the real 11th element, counting it as valid when both, predicted and real, are equal. 
 
 
-## Applications for encode and decode sequence data when follows a math pattern extrapolable with the method. 
+## TODO Experimental . Applications for encode and decode sequence data when follows a math pattern extrapolable with the method. Functional encoding
 
 ### Encode data sequence
+
 Convert data sequence to f = (index,frac1,frac2,frac3,longitude)
 
 Convert data secuence to a function / symbol dictionary and replace sequence patterns for the symbol
@@ -174,8 +175,6 @@ Probnet Storage (20,1,1,2):
 103 bytes vs 9 , and less with better encoding for decimal data for this case, because just are 3 symbols x 2 bit for each one , 6 bits
 
 
-
-
 ### Decode data sequence
 
 Convert encoded probnet function parameters to data sequence
@@ -188,9 +187,9 @@ Convert encoded data sequence to real data converting each symbol by his element
 	- return no function dictionary was found , or no functionon decoding for this sequence, if input data is not in the correct data type.
 
 
+Allways when data source can be grouped in data sequences in order of symbols of function method are less than original input, the data can be encoded reducing the symbols in a expresion with probnet method.
 
-
-
+Actual data encoding/compression is based in the number of repetitios of a symbol in a dataset. The functional encoding is based in the conversion of data in functions.
 
 Author - Vicent Nos Ripolles
 
