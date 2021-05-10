@@ -130,6 +130,8 @@ Such method would not require that every element in the sequence be different th
 
 ## Conclussion (DRAFT)
 
+````haskell
+
 sequence = [1,2,3,5]
 
 f1(x,y) =  (100 * x) / y
@@ -141,6 +143,9 @@ d2 = f1 (3,5)
 m = last sequence (5)
 
 fnos (m,d1,d2) = next_out_sequence(m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
+
+````
+
 
 
 
