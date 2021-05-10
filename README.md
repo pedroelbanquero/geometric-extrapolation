@@ -150,11 +150,12 @@ Example :
 
  5-(3*100/66.6) + (5*100/66.6) = 8.00 ...
 
-
+round $ ((3*100/66.6)-5) + (5*100/60) = 8 
 
 
 ````
 
+Nos function solves the next element of the sequence.
 
 
 
