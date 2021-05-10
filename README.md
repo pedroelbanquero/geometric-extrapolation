@@ -144,7 +144,7 @@ m = last sequence (5)
 
 -- Next Out sequence
 
-fnos (m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
+fnos (m,d1,d2) = round ( ( ( m * d1 / 100 ) - m ) + ( m * d2 / 100  ) )
 
 Example :
 
