@@ -143,7 +143,15 @@ d2 = f1 (3,5)
 m = last sequence (5)
 
 -- Next Out sequence
+
 fnos (m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
+
+Example :
+
+ 5-(3*100/66.6) + (5*100/66.6) = 8.00 ...
+
+
+
 
 ````
 
