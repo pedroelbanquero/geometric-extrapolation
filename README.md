@@ -142,7 +142,7 @@ d2 = f1 (3,5)
 
 m = last sequence (5)
 
--- Next Out sequence
+-- Next Out Sequence
 
 fnos (m,d1,d2) = round ( ( ( m * d1 / 100 ) - m ) + ( m * d2 / 100  ) )
 
