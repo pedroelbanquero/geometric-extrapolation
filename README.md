@@ -134,7 +134,7 @@ Such method would not require that every element in the sequence be different th
 
 sequence = [1,2,3,5]
 
-f1(x,y) =  (100 * x) / y
+f1(x,y) =  (x) / y
 
 d1 = f1 (2,3)
 
@@ -142,9 +142,11 @@ d2 = f1 (3,5)
 
 m = last sequence (5)
 
+n = last $ last sequence
+
 -- Next Out Sequence
 
-fnos (m,d1,d2) = round ( ( ( m * d1 / 100 ) - m ) + ( m * d2 / 100  ) )
+fnos (m,n,d1,d2) = round ( ( ( n * d1 ) - m ) + ( m * d2  ) )
 
 Example :
 
