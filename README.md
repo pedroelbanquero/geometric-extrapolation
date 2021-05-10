@@ -128,7 +128,7 @@ It can be noticed that an arithmetic, instead of geometric, method for the extra
 
 Such method would not require that every element in the sequence be different than 0, and the method would be suitable for sequences with negative and positive values. 
 
-## Conclussion (DRAFT)
+## Conclusion 
 
 ````haskell
 
@@ -147,8 +147,6 @@ m = last sequence (5)
 fnos (m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
 
 Example :
-
- 5-(3*100/66.6) + (5*100/66.6) = 8.00 ...
 
 round $ ((3*100/66.6)-5) + (5*100/60) = 8 
 
