@@ -140,7 +140,7 @@ d2 = f1 (3,5)
 
 m = last sequence (5)
 
-f2(m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
+function_next_point(m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
 
 
 
