@@ -128,17 +128,15 @@ It can be noticed that an arithmetic, instead of geometric, method for the extra
 
 Such method would not require that every element in the sequence be different than 0, and the method would be suitable for sequences with negative and positive values. 
 
-Conclussion (DRAFT)
+## Conclussion (DRAFT)
 
 sequence = [1,2,3,5]
 
 f1(x,y) =  (100 * x) / y
 
-d1 = f1 (1,2)
+d1 = f1 (2,3)
 
-d2 = f1 (2,3)
-
-d3 = f1 (3,5)
+d2 = f1 (3,5)
 
 m = last sequence (5)
 
