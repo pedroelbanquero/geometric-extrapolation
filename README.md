@@ -142,7 +142,8 @@ d2 = f1 (3,5)
 
 m = last sequence (5)
 
-fnos (m,d1,d2) = next_out_sequence(m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
+-- Next Out sequence
+fnos (m,d1,d2) = round ( (m - ( m * d1 / 100 ) ) + ( m * d2 / 100  ) )
 
 ````
 
