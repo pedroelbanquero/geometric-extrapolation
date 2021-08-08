@@ -30,7 +30,7 @@ A solution based just on the available data has applications on the following ar
 - uncertain prediction
 - data modeling
 - risk modeling
-
+- data encoder decoder
 
 ## A geometric way of prediction 
 
@@ -128,6 +128,36 @@ It can be noticed that an arithmetic, instead of geometric, method for the extra
 
 Such method would not require that every element in the sequence be different than 0, and the method would be suitable for sequences with negative and positive values. 
 
+## Conclusion 
+
+````haskell
+
+sequence = [1,2,3,5]
+
+f1(x,y) =  (x) / y
+
+d1 = f1 (3,2)
+
+d2 = f1 (5,3)
+
+m = last sequence (5)
+
+n = last $ last sequence
+
+-- Next Out Sequence
+
+fnos (m,n,d1,d2) = round ( ( ( n * d1 ) - m ) + ( m * d2  ) )
+
+Example :
+
+round $ ((3*1.66)-5) + (5*1.6) = 8 
+
+
+````
+
+Nos function solves the next element of the sequence.
+
+
 
 ## Testing
 
@@ -137,6 +167,8 @@ The file `test-probnet.hs` contains a function `testoeis` to bulk testing the fu
     [("A3",[1,1,1,1,2,2,1,2,2,2,3,2,2,4,2,2,4,2,3,4,4,2,3,4,2,6,3,2,6,4,3,4,4,4,6,4,2,6,4,4,8,4,3,6,4,4,5,4,4,6,6,4,6,6,4,8,4,2,9,4,6,8,4,4,8,8,3,8,8,4,7,4,4,10,6,6,8,4,5,8,6,4,9,8,4,10,6,4,12,8,6,6,4,8,8,8,4,8,6,4]),("A12",[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])]
 
 The testing is made using just the first 10 values for predicting the 11 one, and comparing it with the real 11th element, counting it as valid when both, predicted and real, are equal. 
+
+
 
 
 

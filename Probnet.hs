@@ -119,6 +119,55 @@ decode (a,b,c,d,e) = res
 --	where
 --	(a,b,c)= (probnetable n )
 	
+
+-- | Encode data sequence
+-- convert data sequence to f = (index,frac1,frac2,frac3,longitude)
+-- TODO convert data secuence to a function / symbol dictionary and replace sequence patterns for the symbol
+-- example parse 1,2,3,4,5,8,16.... / output -> (.,30,1,1,1),(,,10,2,4,8) .....,,
+-- the idea is convert different values in the same symbol, in decode moment replace the function symbol by the element in the index of the data sequence.
+--
+encode dat = (l,f2-f1,f3-f2,f4-f3)
+   where
+   l = length dat
+   f1 = dat !! 0
+   f2 = dat !! 1
+   f3 = dat !! 2
+   f4 = dat !! 3
+   -- add split patterns function to the dictionary
+   -- rewrite sequence to new function symbols
+   -- rewrite base for encoding
+   -- output dictionary + rewrited symbols sequence
+   -- return imposible to encode if no improve in the encodening comparing bit size are detected
+
+
+-- | Encode function for files + lzma
+--
+
+
+
+-- | Decode data sequence
+-- convert encoded probnet function parameters to data sequence
+-- TODO convert encoded data sequence to real data converting each symbol by his element in the function data secuence in the dictionary.
+decode encoded = probnet (i-(length encoded-1)) [fromIntegral f1,fromIntegral f2,fromIntegral f3,fromIntegral f4]
+	where
+	i = encoded!!0
+	f1 = encoded!!1
+	f2 = encoded!!2
+	f3 = encoded!!3
+	f4 = encoded!!4
+	-- get dictionary function
+	-- replace funcion data secuence by function elements to generate the real data sequence
+	-- output results
+	-- return no function dictionary was found , or no functionon decoding for this sequence
+
+
+
+
+-- | Decode file to a file
+-- 
+
+
+>>>>>>> 8209e26b68787f91772a88c895a33f49a3ff1ac7
 -- | Property of Cobalt Technologies Panamá
 -- | Authors : Vicent Nos Ripolles (Main Author)
 -- | Enrique Santos (Refactor Code)
