@@ -75,7 +75,7 @@ Then, we can calculate the difference between the predicted value and the real v
 
 We round the result to get the integer predicted value. 
 
-The the predicted error `-0.1333333333333331` is obtained in the same way as the predicted values of the initial sequence: by multiplying the last error `0.1999999999999993` with a suitable ratio, here `-0.3333333333333339/0.5`,  chosen as explained in the next section.
+The predicted error `-0.1333333333333331` is obtained in the same way as the predicted values of the initial sequence: by multiplying the last error `0.1999999999999993` with a suitable ratio, here `-0.3333333333333339/0.5`,  chosen as explained in the next section.
 
 ### Sequences with quasi-cyclic pattern
 
@@ -92,7 +92,7 @@ For example, in the next sequence, the value closest to the last one is the seco
 
 ### Layers of predictions
 
-Once we have predicted (and corrected with error) the next value of a sequence, we can append it to the original sequence and predict another element. We can do this as many times as we want. We call "layers" to the number of applications. Then, if we apply 3 layers to our fibonacci secuence `fib = [1,2,3,5,8,13]`, we get 3 more values: 
+Once we have predicted (and corrected with the predicted error) the next value of a sequence, we can append it to the original sequence and predict another element. We can do this as many times as we want. We call "layers" the number of such applications. Then, if we apply 3 layers to our fibonacci secuence `fib = [1,2,3,5,8,13]`, we get 3 more values: 
 
     probnet 3 fibo
     [1,2,3,5,8,13,21,34,55]
@@ -139,7 +139,7 @@ The testing is made using just the first 10 values for predicting the 11 one, an
 
 
 
-
+--------------------
 
 Author - Vicent Nos Ripolles
 
