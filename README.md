@@ -75,12 +75,13 @@ Then, we can calculate the difference between the predicted value and the real v
 
 We round the result to get the integer predicted value. 
 
+The the predicted error `-0.1333333333333331` is obtained in the same way as the predicted values of the initial sequence: by multiplying the last error `0.1999999999999993` with a suitable ratio, here `-0.3333333333333339/0.5`,  chosen as explained in the next section.
 
 ### Sequences with quasi-cyclic pattern
 
 When a sequence is not monothonic, we assume that it has a repetitive pattern, so that the ratio used for prediction will be the one of the element whose value is closest to the last element. 
 
-For example, in the next sequence, the value closest to the last one is the first `3`, and the ratio of that position is `4/3`, so the predicted value will be `3*(4/3)`:
+For example, in the next sequence, the value closest to the last one is the second `3`, and the ratio of that position is `4/3`, so the predicted value will be `3*(4/3)`:
 
     percents [1,2,3,4,5,1,2,3,4,1,2,3]
     [2.0,1.5,1.3333333333333333,1.25,0.2,2.0,1.5,1.3333333333333333,0.25,2.0,1.5]
@@ -89,9 +90,9 @@ For example, in the next sequence, the value closest to the last one is the firs
     4.0
 
 
-### Recursive layers of predictions
+### Layers of predictions
 
-Once we have predicted the next value of a sequence, we can append it to the original sequence and predict another element. We can do this as many times as we want. We call "layers" to the number of recursions. Then, if we apply 3 layers to our fibonacci secuence `fib = [1,2,3,5,8,13]`, we get 3 more values: 
+Once we have predicted (and corrected with error) the next value of a sequence, we can append it to the original sequence and predict another element. We can do this as many times as we want. We call "layers" to the number of applications. Then, if we apply 3 layers to our fibonacci secuence `fib = [1,2,3,5,8,13]`, we get 3 more values: 
 
     probnet 3 fibo
     [1,2,3,5,8,13,21,34,55]
@@ -102,7 +103,6 @@ Once we have predicted the next value of a sequence, we can append it to the ori
 The geometric way, that is, a way based on ratios of values, can only be valid for non-zero values, and is not suitable for sequences with negative and positive values. In that case it should be more appropiate the use of a usual diferential method, which can be very simmilar to the one presented here, but using diferences of elements instead of quotients of elements. 
 
 The case of zero values is not solved here. The function will just return an error if any element is 0. 
-
 
 ## Tecnical details
 
@@ -127,37 +127,6 @@ It also implies that the input sequence can not be of any `Integral` type, it mu
 It can be noticed that an arithmetic, instead of geometric, method for the extrapolation can be coded by just changing the `quotient` `sub-function in the `percents` function by the standard `subtract`, and the product (*) in the `predict1` function by addition (+).
 
 Such method would not require that every element in the sequence be different than 0, and the method would be suitable for sequences with negative and positive values. 
-
-## Conclusion 
-
-````haskell
-
-sequence = [1,2,3,5]
-
-f1(x,y) =  (x) / y
-
-d1 = f1 (3,2)
-
-d2 = f1 (5,3)
-
-m = last sequence (5)
-
-n = last $ last sequence
-
--- Next Out Sequence
-
-fnos (m,n,d1,d2) = round ( ( ( n * d1 ) - m ) + ( m * d2  ) )
-
-Example :
-
-round $ ((3*1.5)-5) + (5*1.66) = 8 
-
-
-````
-
-Nos function solves the next element of the sequence.
-
-
 
 ## Testing
 
